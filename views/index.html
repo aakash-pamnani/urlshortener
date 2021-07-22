@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Url Shortner</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="style.css" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"> -->
+    <script>
+        $(document).ready(function () {
+
+            $('#urlform').submit(function (event) {
+                event.preventDefault();
+                $("#copy").empty().text("Copy");
+                $('.error').css('display', "none");
+                $('.output').css('display', "none");
+                $('#submit').prop('disabled', true);
+                $("#submit").empty().text("Loading...");
+                var posting = $.post("/process", {
+                    longurl: $("#url").val(),
+                    customurl: $("#customurl").val(),
+                });
+
+
+                posting.done(function (data) {
+                    console.log(data);
+                    $('.output').css('display', "inline-block");
+                    $('#output').val('http://localhost:5003/' + data.shorturl);
+                    $('#hidden').text(' http://localhost:5003/' + data.shorturl);
+                    $("#submit").empty().text("Submit");
+                    $('#submit').prop('disabled', false);
+                });
+
+
+                posting.fail(function (data) {
+                    console.log(data);
+                    $('.error').css('display', "block");
+                    $('#error').text(data.responseJSON.message);
+                    $("#submit").empty().text("Submit");
+                    $('#submit').prop('disabled', false);
+                });
+
+
+                return false;
+            });
+        });
+
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+
+            $("#copy").empty().text("Text Copied");
+
+        }
+
+
+    </script>
+
+</head>
+<!-- <script>
+
+</script> -->
+
+<body>
+
+
+    <!-- <nav>
+        <ul>
+            <li class="logo"><a>URL Shortner</a></li>
+            <li class="active">Home</li>
+            <li></li>
+
+        </ul>
+    </nav> -->
+
+    <!-- <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+    </div> -->
+
+    <div class="topnav">
+
+        <ul>
+            <li><a class="active" href="/">Home</a></li>
+            <li> <a href="/api">API</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/myurls">My URLS</a></li>
+        </ul>
+    </div>
+
+
+    <div class="maincontainer">
+        <form id="urlform" action="/process" method='POST' autocomplete="off">
+            <input type="url" id="url" placeholder="Enter long url" name="longurl" required="true"><br>
+            <input type="text" id="customurl" placeholder="Enter Custom if you want." name="customurl"><br>
+            <button type="submit" id="submit">Submit</button>
+        </form>
+
+        <div class="error">
+            <p id="error"></p>
+        </div>
+        <div class="output">
+            <input readonly type="url" id="output">
+            <button onclick="copyToClipboard('#hidden')" id="copy">Copy</button>
+        </div>
+        <p hidden id="hidden"></p>
+
+
+    </div>
+
+
+
+
+
+
+</body>
+
+</html>

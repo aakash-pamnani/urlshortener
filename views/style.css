@@ -1,0 +1,131 @@
+body{
+    margin: 0px;
+    font-family: 'Roboto';
+}
+
+.maincontainer{
+    background-color: whitesmoke;
+    text-align: center;
+    padding: 10%;
+}
+
+.topnav {
+    background-color: #071b3b;
+    overflow: hidden;
+    height: max-content;
+
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+  }
+
+  .topnav ul {
+    list-style: none;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+ }
+ 
+ .topnav ul li {
+    display: inline-block;
+    
+ }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #173058;
+    color: white;
+  }
+  
+  /* Add a color to the active/current link */
+  .topnav a.active {
+    background-color: #04AA6D;
+    color: white;
+  }
+  
+  #url, #customurl{
+    padding: 10px;
+    font-size: 16px;
+    color: #071b3b;
+    width: 50%;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid #173058;
+    outline: none;
+    background: transparent;
+  }
+
+  #submit {
+    background: #3e64ff;
+    border: 2px solid #3e64ff;
+    border-radius: 20px;
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+    
+  }
+  button{
+    min-width: 100px;
+  }
+
+  #copy {
+    background: #04AA6D;
+    border: 2px solid #147c51;
+    border-radius: 20px;
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  #submit:hover {
+    
+    background: #bfc5c5;
+    border: 2px solid #3e64ff;
+    border-radius: 20px;
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+    
+  }
+
+  #copy:hover{
+    
+    background: #81d6af;
+    border: 2px solid #147c51;
+    border-radius: 20px;
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+    
+  }
+
+  #submit:disabled{
+    
+    background: #969797;
+    border: 2px solid #3e64ff;
+    border-radius: 20px;
+    padding-bottom: 10px;
+    color: #fff;
+    cursor: not-allowed;
+    padding: 11px 16px;
+  }
+
+  .output{
+
+    background-color: #d5dbda;
+    padding: 10px;
+    margin: 10px;
+    display: none;
+
+  }
+
+  .error{
+    color: red;
+  }
